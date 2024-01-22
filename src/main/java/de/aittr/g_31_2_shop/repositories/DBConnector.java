@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DBConnector {
         private static final String DB_DRIVER_PATH = "com.mysql.cj.jdbc.Driver";
-        private static final String DB_ADDRESS = "jdbc:mysql://localhost:3306";
+        private static final String DB_ADDRESS = "jdbc:mysql://localhost:3306/";
         private static final String DB_NAME = "31_2_shop";
         private static final String DB_USERNAME = "root";
         private static final String DB_PASSWORD = "rootroot";

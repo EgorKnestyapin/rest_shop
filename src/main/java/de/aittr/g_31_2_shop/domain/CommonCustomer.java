@@ -9,6 +9,7 @@ public class CommonCustomer implements Customer {
     private int id;
     private boolean isActive;
     private String name;
+
     private Cart cart;
 
     public CommonCustomer() {
@@ -31,8 +32,18 @@ public class CommonCustomer implements Customer {
     }
 
     @Override
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    @Override
     public Cart getCart() {
         return cart;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -51,6 +62,6 @@ public class CommonCustomer implements Customer {
     @Override
     public String toString() {
         return String.format("Покупатель: ИД - %d, имя - %s, активен - %s, содержимое корзины:%n%s",
-                id, name, isActive ? "да": "нет", cart);
+                id, name, isActive ? "да" : "нет", cart);
     }
 }
