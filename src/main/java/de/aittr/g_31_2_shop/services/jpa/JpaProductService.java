@@ -83,10 +83,10 @@ public class JpaProductService implements ProductService {
     @Override
     public double getActiveProductAveragePrice() {
         List<ProductDto> activeProducts = getAllActiveProducts();
-        double totalPrice = activeProducts
+        return activeProducts
                 .stream()
                 .mapToDouble(ProductDto::getPrice)
-                .sum();
-        return totalPrice / activeProducts.size();
+                .average()
+                .orElse(0);
     }
 }
