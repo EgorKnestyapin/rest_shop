@@ -1,4 +1,4 @@
-package de.aittr.g_31_2_shop.repositories;
+package de.aittr.g_31_2_shop.repositories.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

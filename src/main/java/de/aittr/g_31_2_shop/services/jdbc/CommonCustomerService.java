@@ -1,4 +1,4 @@
-package de.aittr.g_31_2_shop.services;
+package de.aittr.g_31_2_shop.services.jdbc;
 
 import de.aittr.g_31_2_shop.domain.interfaces.Customer;
 import de.aittr.g_31_2_shop.repositories.interfaces.CustomerRepository;
@@ -22,7 +22,7 @@ public class CommonCustomerService implements CustomerService {
 
     @Override
     public List<Customer> getAllActiveCustomers() {
-        return null;
+        return customerRepository.getAll();
     }
 
     @Override
@@ -37,6 +37,46 @@ public class CommonCustomerService implements CustomerService {
 
     @Override
     public void deleteById(int id) {
+
+    }
+
+    @Override
+    public void deleteByName(int id) {
+
+    }
+
+    @Override
+    public void restoreById(int id) {
+
+    }
+
+    @Override
+    public int getActiveCustomerCount() {
+        return 0;
+    }
+
+    @Override
+    public double getCartTotalPriceById(int customerId) {
+        return 0;
+    }
+
+    @Override
+    public double getAverageProductPriceById(int customerId) {
+        return 0;
+    }
+
+    @Override
+    public void addProductToCart(int customerId, int productId) {
+
+    }
+
+    @Override
+    public void deleteProductFromCart(int customerId, int productId) {
+
+    }
+
+    @Override
+    public void clearCartById(int customerId) {
 
     }
 }

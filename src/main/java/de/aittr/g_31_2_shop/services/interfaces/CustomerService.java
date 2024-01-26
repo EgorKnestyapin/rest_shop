@@ -16,4 +16,20 @@ public interface CustomerService {
 
     void deleteById(int id);
 
+    void deleteByName(int id);
+
+    void restoreById(int id);
+
+    int getActiveCustomerCount();
+
+    double getCartTotalPriceById(int customerId);
+
+    double getAverageProductPriceById(int customerId);
+
+    void addProductToCart(int customerId, int productId);
+
+    void deleteProductFromCart(int customerId, int productId);
+
+    void clearCartById(int customerId);
+
 }

@@ -4,10 +4,18 @@ import java.util.List;
 
 public interface Cart {
     int getId();
+
+    void setId(int id);
+
     List<Product> getProducts();
+
     void addProduct(Product product);
+
     void deleteProductById(int id);
+
     void clear();
+
     double getTotalPrice();
+
     double getAveragePrice();
 }

@@ -1,4 +1,4 @@
-package de.aittr.g_31_2_shop.domain;
+package de.aittr.g_31_2_shop.domain.jdbc;
 
 import de.aittr.g_31_2_shop.domain.interfaces.Cart;
 import de.aittr.g_31_2_shop.domain.interfaces.Product;
@@ -21,6 +21,11 @@ public class CommonCart implements Cart {
     @Override
     public int getId() {
         return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
