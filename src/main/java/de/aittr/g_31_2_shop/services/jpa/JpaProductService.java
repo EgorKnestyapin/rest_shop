@@ -3,10 +3,7 @@ package de.aittr.g_31_2_shop.services.jpa;
 import de.aittr.g_31_2_shop.domain.dto.ProductDto;
 import de.aittr.g_31_2_shop.domain.interfaces.Product;
 import de.aittr.g_31_2_shop.domain.jpa.JpaProduct;
-import de.aittr.g_31_2_shop.exception_handling.exceptions.FirstTestException;
-import de.aittr.g_31_2_shop.exception_handling.exceptions.FourthTestException;
-import de.aittr.g_31_2_shop.exception_handling.exceptions.SecondTestException;
-import de.aittr.g_31_2_shop.exception_handling.exceptions.ThirdTestException;
+import de.aittr.g_31_2_shop.exception_handling.exceptions.*;
 import de.aittr.g_31_2_shop.repositories.jpa.JpaProductRepository;
 import de.aittr.g_31_2_shop.services.interfaces.ProductService;
 import de.aittr.g_31_2_shop.services.mapping.ProductMappingService;
@@ -57,8 +54,13 @@ public class JpaProductService implements ProductService {
 
     @Override
     public void update(ProductDto productDto) {
-        JpaProduct jpaProduct = mappingService.mapDtoToJpaProduct(productDto);
-        repository.save(jpaProduct);
+        try {
+            JpaProduct jpaProduct = mappingService.mapDtoToJpaProduct(productDto);
+            repository.save(jpaProduct);
+        } catch (Exception e) {
+            throw new UpdateProductException(e.getMessage());
+        }
+
     }
 
     @Override
@@ -70,7 +72,10 @@ public class JpaProductService implements ProductService {
 
         if (jpaProduct != null && jpaProduct.isActive()) {
             jpaProduct.setActive(false);
+            return;
         }
+        throw new DeleteProductException("Удаление невозможно, так как продукт с таким ID отсутствует в базе данных");
+
     }
 
     @Override
@@ -83,7 +88,10 @@ public class JpaProductService implements ProductService {
 
         if (jpaProduct != null && jpaProduct.isActive()) {
             jpaProduct.setActive(false);
+            return;
         }
+        throw new DeleteProductException("Удаление невозможно, так как продукт с таким названием отсутствует " +
+                "в базе данных");
     }
 
     @Override
@@ -95,7 +103,10 @@ public class JpaProductService implements ProductService {
 
         if (jpaProduct != null && !jpaProduct.isActive()) {
             jpaProduct.setActive(true);
+            return;
         }
+        throw new RestoreProductException("Восстановление невозможно, так как продукт с таким ID отсутствует " +
+                "в базе данных");
     }
 
     @Override

@@ -3,6 +3,10 @@ package de.aittr.g_31_2_shop.domain.jpa;
 import de.aittr.g_31_2_shop.domain.interfaces.Cart;
 import de.aittr.g_31_2_shop.domain.interfaces.Customer;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
@@ -15,10 +19,22 @@ public class JpaCustomer implements Customer {
     private int id;
 
     @Column(name = "is_active")
+    @NotNull
     private boolean isActive;
 
     @Column(name = "name")
+    @NotNull
+    @NotBlank
     private String name;
+
+    @Column(name = "age")
+    @Min(7)
+    private int age;
+
+    @Column(name = "email")
+    @NotNull
+    @Email
+    private String email;
 
     @OneToOne(mappedBy = "customer")
     private JpaCart cart;
