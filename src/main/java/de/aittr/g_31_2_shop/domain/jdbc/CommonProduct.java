@@ -28,6 +28,11 @@ public class CommonProduct implements Product {
     }
 
     @Override
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    @Override
     public void setId(int id) {
         this.id = id;
     }

@@ -2,6 +2,7 @@ package de.aittr.g_31_2_shop.domain.jpa;
 
 import de.aittr.g_31_2_shop.domain.interfaces.Product;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 
@@ -12,9 +13,22 @@ public class JpaProduct implements Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    // Pear - ok
+    // pear - not ok
+    // PEAR - not ok
+    // PEar - not ok
+    // Pe - not ok
+    // Pear7 - not ok
+    // Pear# - not ok
     @Column(name = "name")
+//    @NotNull при паттерне эти аннотации лишние
+//    @NotBlank
+    @Pattern(regexp = "[A-Z][a-z]{3,}")
     private String name;
     @Column(name = "price")
+    @Min(10)
+    @Max(1000)
     private double price;
     @Column(name = "is_active")
     private boolean isActive;

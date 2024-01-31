@@ -1,7 +1,11 @@
 package de.aittr.g_31_2_shop.controllers;
 
 import de.aittr.g_31_2_shop.domain.dto.ProductDto;
+import de.aittr.g_31_2_shop.exception_handling.Response;
+import de.aittr.g_31_2_shop.exception_handling.exceptions.FirstTestException;
 import de.aittr.g_31_2_shop.services.interfaces.ProductService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +20,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductDto save(@RequestBody ProductDto productDto) {
+    public ProductDto save(@Valid @RequestBody ProductDto productDto) {
         return productService.save(productDto);
     }
 
@@ -40,12 +44,12 @@ public class ProductController {
         productService.deleteById(id);
     }
 
-    @DeleteMapping("/delete/{name}")
+    @DeleteMapping("/del_by_name/{name}")
     public void deleteByName(@PathVariable String name) {
         productService.deleteByName(name);
     }
 
-    @PutMapping("/restore/{id}")
+    @PutMapping("/{id}")
     public void restoreById(@PathVariable int id) {
         productService.restoreById(id);
     }
@@ -63,5 +67,16 @@ public class ProductController {
     @GetMapping("/averagePrice")
     public double getAveragePrice() {
         return productService.getActiveProductAveragePrice();
+    }
+
+    // 1 способ - создание метода-обработчика в контроллере, где мы ожидаем ошибки
+    // Минус - если в разных контроллерах требуется обрабатывать ошибки одинаково,
+    // то нам придется написать один и тот же обработчик в разных контроллерах.
+    // Плюс - если в разных контроллерах требуется обработать ошибки по-разному,
+    // то мы можем это сделать
+    @ExceptionHandler(FirstTestException.class)
+    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+    public Response handleException(FirstTestException e) {
+        return new Response(e.getMessage());
     }
 }
