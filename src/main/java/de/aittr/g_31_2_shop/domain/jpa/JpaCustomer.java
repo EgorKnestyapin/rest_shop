@@ -19,7 +19,6 @@ public class JpaCustomer implements Customer {
     private int id;
 
     @Column(name = "is_active")
-    @NotNull
     private boolean isActive;
 
     @Column(name = "name")
