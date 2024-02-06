@@ -125,8 +125,7 @@ public class AspectLogging {
     public void beforeEachServiceMethod(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         String methodName = joinPoint.getSignature().getName();
-        String[] splitDeclaringTypeName = joinPoint.getSignature().getDeclaringTypeName().split("\\.");
-        String className = splitDeclaringTypeName[splitDeclaringTypeName.length - 1];
+        String className = joinPoint.getSignature().getDeclaringType().getSimpleName();
         StringBuilder builder = new StringBuilder(String.format("Вызван метод %s класса %s", methodName, className));
         if (args.length != 0) {
             builder.append(" c параметрами: ");
@@ -142,8 +141,7 @@ public class AspectLogging {
     @AfterReturning(pointcut = "runAllServicesMethods()", returning = "result")
     public void afterReturningEachServiceMethod(JoinPoint joinPoint, Object result) {
         String methodName = joinPoint.getSignature().getName();
-        String[] splitDeclaringTypeName = joinPoint.getSignature().getDeclaringTypeName().split("\\.");
-        String className = splitDeclaringTypeName[splitDeclaringTypeName.length - 1];
+        String className = joinPoint.getSignature().getDeclaringType().getSimpleName();
         logger.info(String.format("Метод %s класса %s успешно завершил работу с результатом %s", methodName, className,
                 result));
     }
@@ -151,8 +149,7 @@ public class AspectLogging {
     @AfterThrowing(pointcut = "runAllServicesMethods()", throwing = "e")
     public void afterThrowingEachServiceMethod(JoinPoint joinPoint, Exception e) {
         String methodName = joinPoint.getSignature().getName();
-        String[] splitDeclaringTypeName = joinPoint.getSignature().getDeclaringTypeName().split("\\.");
-        String className = splitDeclaringTypeName[splitDeclaringTypeName.length - 1];
+        String className = joinPoint.getSignature().getDeclaringType().getSimpleName();
         logger.info(String.format("Метод %s класса %s выбросил ошибку %s", methodName, className, e.getMessage()));
     }
 }
