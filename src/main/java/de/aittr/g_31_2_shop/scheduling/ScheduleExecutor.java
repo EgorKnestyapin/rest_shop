@@ -109,17 +109,14 @@ public class ScheduleExecutor {
     }
 
     @Scheduled(fixedRate = 30000)
-    @Async
     public void printFiveLastTasks() {
-        List<Task> tasks = taskService.getTasks();
-        System.out.println(tasks.subList(tasks.size() - 5, tasks.size()));
+        List<Task> tasks = taskService.getNLastTasks(5);
+        System.out.println(tasks);
     }
 
     @Scheduled(cron = "15,45 * * * * *")
-    @Async
     public void printLastAddedProduct() {
-        List<ProductDto> products = jpaProductService.getAllActiveProducts();
-        ProductDto lastProduct = products.get(products.size() - 1);
+        JpaProduct lastProduct = jpaProductService.getLastAddedProduct();
         taskService.createTask(String.format("Последний добавленный в БД продукт - %s", lastProduct.getName()));
     }
 }

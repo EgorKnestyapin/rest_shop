@@ -18,4 +18,7 @@ public interface JpaProductRepository extends JpaRepository<JpaProduct, Integer>
     void restoreById(@Param("id") Integer id);
 
     JpaProduct findByName(String name);
+
+    @Query(value = "SELECT * FROM product ORDER BY id DESC LIMIT 1", nativeQuery = true)
+    JpaProduct findLastAddedProduct();
 }

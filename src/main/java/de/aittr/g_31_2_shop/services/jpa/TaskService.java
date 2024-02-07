@@ -26,4 +26,8 @@ public class TaskService {
     public List<Task> getTasks() {
         return repository.findAll();
     }
+
+    public List<Task> getNLastTasks(int n) {
+        return repository.findNLastTasks(n);
+    }
 }
