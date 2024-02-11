@@ -108,15 +108,15 @@ public class ScheduleExecutor {
         );
     }
 
-    @Scheduled(fixedRate = 30000)
-    public void printFiveLastTasks() {
-        List<Task> tasks = taskService.getNLastTasks(5);
-        System.out.println(tasks);
-    }
-
-    @Scheduled(cron = "15,45 * * * * *")
-    public void printLastAddedProduct() {
-        JpaProduct lastProduct = jpaProductService.getLastAddedProduct();
-        taskService.createTask(String.format("Последний добавленный в БД продукт - %s", lastProduct.getName()));
-    }
+//    @Scheduled(fixedRate = 30000)
+//    public void printFiveLastTasks() {
+//        List<Task> tasks = taskService.getNLastTasks(5);
+//        System.out.println(tasks);
+//    }
+//
+//    @Scheduled(cron = "15,45 * * * * *")
+//    public void printLastAddedProduct() {
+//        JpaProduct lastProduct = jpaProductService.getLastAddedProduct();
+//        taskService.createTask(String.format("Последний добавленный в БД продукт - %s", lastProduct.getName()));
+//    }
 }

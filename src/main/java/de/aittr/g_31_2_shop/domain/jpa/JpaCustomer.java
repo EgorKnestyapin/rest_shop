@@ -1,5 +1,6 @@
 package de.aittr.g_31_2_shop.domain.jpa;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.aittr.g_31_2_shop.domain.interfaces.Cart;
 import de.aittr.g_31_2_shop.domain.interfaces.Customer;
 import jakarta.persistence.*;
@@ -7,8 +8,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.management.relation.Role;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -37,6 +44,10 @@ public class JpaCustomer implements Customer {
 
     @OneToOne(mappedBy = "customer")
     private JpaCart cart;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public JpaCustomer() {
     }
