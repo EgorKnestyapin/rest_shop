@@ -1,5 +1,6 @@
 package de.aittr.g_31_2_shop.domain.jpa;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.aittr.g_31_2_shop.domain.interfaces.Cart;
 import de.aittr.g_31_2_shop.domain.interfaces.Customer;
 import de.aittr.g_31_2_shop.domain.interfaces.Product;
@@ -26,6 +27,7 @@ public class JpaCart implements Cart {
     private List<JpaProduct> productList = new ArrayList<>();
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id")
     private JpaCustomer customer;
 
@@ -50,7 +52,10 @@ public class JpaCart implements Cart {
     @Override
     public List<Product> getProducts() {
         // TODO посмотреть, как будет на практике, потом переделать
-        return new ArrayList<>(productList);
+        return new ArrayList<>(productList
+                .stream()
+                .filter(jpaProduct -> jpaProduct.isActive())
+                .toList());
     }
 
     @Override

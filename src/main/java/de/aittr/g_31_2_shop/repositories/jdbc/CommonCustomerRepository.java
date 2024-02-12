@@ -22,6 +22,10 @@ public class CommonCustomerRepository implements CustomerRepository {
     private final String CART_ID = "ca.id";
     private final String PRODUCT_ID = "pr.id";
     private final String CUSTOMER_NAME = "cu.name";
+
+    private final String CUSTOMER_AGE = "cu.age";
+
+    private final String CUSTOMER_EMAIL = "cu.email";
     private final String PRODUCT_NAME = "pr.name";
     private final String PRICE = "price";
 
@@ -70,7 +74,9 @@ public class CommonCustomerRepository implements CustomerRepository {
                     int cartId = resultSet.getInt(CART_ID);
                     Cart cart = new CommonCart(cartId);
                     String customerName = resultSet.getString(CUSTOMER_NAME);
-                    customer = new CommonCustomer(customerId, true, customerName, cart);
+                    int customerAge = resultSet.getInt(CUSTOMER_AGE);
+                    String email = resultSet.getString(CUSTOMER_EMAIL);
+                    customer = new CommonCustomer(customerId, true, customerName, cart, customerAge, email);
                     customers.put(customerId, customer);
                 }
 
